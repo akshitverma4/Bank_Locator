@@ -4,10 +4,10 @@
     app:startDestination="@id/searchFragment">
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.wednesday.banklocator.fragment.SearchFragment"
+        android:name="com.wednesday.banklocator.fragment.BankSearchFragment"
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/savedFragment"
-        android:name="com.wednesday.banklocator.fragment.SavedFragment"
+        android:name="com.wednesday.banklocator.fragment.FavouritesBankFragment"
         android:label="SavedFragment" />
 </navigation>
