@@ -1,4 +1,4 @@
-package com.example.banklocator
+package com.wednesday.banklocator
 
 import org.junit.Test
 
