@@ -1,4 +1,4 @@
-package com.example.banklocator
+package com.wednesday.banklocator
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
