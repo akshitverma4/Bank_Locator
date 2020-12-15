@@ -8,6 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
     companion object {
+        
+        const val baseUrl:String = "https://ifsc.razorpay.com/"
 
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()
@@ -16,7 +18,7 @@ class RetrofitInstance {
                 .addInterceptor(logging)
                 .build()
             Retrofit.Builder()
-                .baseUrl("https://ifsc.razorpay.com/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
