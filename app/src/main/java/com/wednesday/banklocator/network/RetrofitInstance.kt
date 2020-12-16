@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitInstance {
     companion object {
         
-       val baseUrl= "https://ifsc.razorpay.com/"
+       private const val baseUrl = "https://ifsc.razorpay.com/"
 
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()
