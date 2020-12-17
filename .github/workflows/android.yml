@@ -36,7 +36,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     - name: Run Lint
-      run: bash ./gradlew lintDebug
+      run: bash ./gradlew lint
     - name: Upload Results
       uses: actions/upload-artifact@v2
       if: failure()
