@@ -14,51 +14,16 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    signingConfigs {
-        release {
-            storeFile file("release-key.keystore")
-            storePassword 'password'
-            keyAlias 'alias'
-            keyPassword 'journaldev'
-        }
-        beta {
-            storeFile file("release-key.keystore")
-            storePassword 'password'
-            keyAlias 'alias'
-            keyPassword 'journaldev'
-        }
-    }
+    
     buildTypes {
         release {
-            signingConfig signingConfigs.release
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug{
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-debug"
-            buildConfigField "String", "TYPE", '"I AM A DEBUG NINJA"'
-            resValue "string", "my_name", "Anupam Debugger"
-        }
-        beta{
-            signingConfig signingConfigs.beta
-            applicationIdSuffix ".beta"
-            versionNameSuffix "-beta"
-            buildConfigField "String", "TYPE", '"I AM A BETA NINJA"'
-            resValue "string", "my_name", "Anupam Beta"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors{
-        free{
-            applicationId "com.wednesday.banklocator"
-        }
-        paid{
-            applicationId "com.wednesday.beta.banklocator"
-        }
-    }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
