@@ -11,6 +11,6 @@ interface IfscSearchApi {
     @GET("/{ifscCode}")
     suspend fun searchForIFSC(
         @Path("ifscCode")
-        Y: String
+        ifscCode: String
     ): Response<IfscResponse>
 }
