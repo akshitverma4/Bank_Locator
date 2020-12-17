@@ -11,3 +11,5 @@ data class IfscResponse(
     val RTGS: Boolean,
     val STATE: String
 )
+
+
