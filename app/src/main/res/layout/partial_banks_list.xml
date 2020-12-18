@@ -10,10 +10,10 @@
 
     <TextView
         android:id="@+id/bankName_tv"
-        android:layout_toStartOf="@id/favouritesIcon"
-        android:layout_alignParentStart="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/favouritesIcon_iv"
         android:text="@string/bank_name"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
@@ -30,15 +30,15 @@
 
 
     <ImageView
-        android:id="@+id/favouritesIcon"
+        android:id="@+id/favouritesIcon_iv"
         android:layout_width="35dp"
-        android:contentDescription="@string/icon_iv"
         android:layout_height="35dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
+        android:contentDescription="@string/icon_iv"
         android:focusable="true"
         android:src="@drawable/ic_heart"
         android:textSize="20sp" />

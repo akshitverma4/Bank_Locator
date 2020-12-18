@@ -31,9 +31,14 @@ class IfscAdapter(var item: IfscResponse) : RecyclerView.Adapter<IfscAdapter.Art
     }
 
     override fun getItemCount(): Int {
-        if (item != null) {
+        if (item.BANK != "Search") {
             return 1
         }
         return 0
+    }
+
+    fun resetDataSource(weather: IfscResponse) {
+        item = weather
+        notifyDataSetChanged()
     }
 }
