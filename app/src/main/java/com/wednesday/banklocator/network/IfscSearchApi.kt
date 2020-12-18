@@ -14,3 +14,4 @@ interface IfscSearchApi {
         ifscCode: String
     ): Response<IfscResponse>
 }
+
