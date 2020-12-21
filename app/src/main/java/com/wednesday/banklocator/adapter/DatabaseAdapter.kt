@@ -9,17 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wednesday.banklocator.R
 import com.wednesday.banklocator.model.IfscResponse
 import com.wednesday.banklocator.viewmodel.BankViewModel
-import kotlinx.android.synthetic.main.partial_banks_list.view.*
+import kotlinx.android.synthetic.main.partial_banks_list.view.bankAddress_tv
+import kotlinx.android.synthetic.main.partial_banks_list.view.bankName_tv
+import kotlinx.android.synthetic.main.partial_saved_banks_list.view.*
 
-class IfscAdapter(var item: IfscResponse, private val viewModel: BankViewModel) :
-    RecyclerView.Adapter<IfscAdapter.bankDetailsViewHolder>(
+class DatabaseAdapter(var item: List<IfscResponse>, private val viewModel: BankViewModel) :
+    RecyclerView.Adapter<DatabaseAdapter.bankDetailsViewHolder>(
     ) {
     inner class bankDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): bankDetailsViewHolder {
         return bankDetailsViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.partial_banks_list,
+                R.layout.partial_saved_banks_list,
                 parent,
                 false
             )
@@ -27,17 +29,20 @@ class IfscAdapter(var item: IfscResponse, private val viewModel: BankViewModel) 
     }
 
     override fun onBindViewHolder(holder: bankDetailsViewHolder, position: Int) {
-        val model = item
+        val model = item[position]
         holder.itemView.apply {
             bankName_tv.text = model.BRANCH
             bankAddress_tv.text = model.ADDRESS
-            favouritesIcon_iv.setOnClickListener {
-                val toast = Toast.makeText(context, model.BRANCH+" added to Local Database", Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER_VERTICAL,0,0)
+            deleteIcon_iv.setOnClickListener {
+                val toast = Toast.makeText(
+                    context,
+                    model.BRANCH + " deleted from Local Database",
+                    Toast.LENGTH_LONG
+                )
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
                 toast.show()
-                viewModel.upsert(model)
+                viewModel.delete(model)
             }
-
 
 
             setOnClickListener {
@@ -48,16 +53,8 @@ class IfscAdapter(var item: IfscResponse, private val viewModel: BankViewModel) 
 
 
     override fun getItemCount(): Int {
-        if (item.BANK != "Search") {
-            return 1
-        }
-        return 0
-    }
 
-
-    fun resetDataSource(weather: IfscResponse) {
-        item = weather
-        notifyDataSetChanged()
+        return item.size
     }
 
     private var onItemClickListener: ((IfscResponse) -> Unit)? = null

@@ -2,8 +2,17 @@ package com.wednesday.banklocator.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
+
+@Entity(
+    tableName = "favourite_banks"
+)
 data class IfscResponse(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
     var ADDRESS: String="",
     var BANK: String="Search",
     var BRANCH: String="",
@@ -15,6 +24,7 @@ data class IfscResponse(
     var STATE: String=""
 ):Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -27,6 +37,7 @@ data class IfscResponse(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id!!)
         parcel.writeString(ADDRESS)
         parcel.writeString(BANK)
         parcel.writeString(BRANCH)
@@ -37,7 +48,6 @@ data class IfscResponse(
         parcel.writeByte(if (RTGS) 1 else 0)
         parcel.writeString(STATE)
     }
-
     override fun describeContents(): Int {
         return 0
     }

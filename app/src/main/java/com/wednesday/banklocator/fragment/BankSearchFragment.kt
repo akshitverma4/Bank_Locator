@@ -3,29 +3,40 @@ package com.wednesday.banklocator.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wednesday.banklocator.R
-import com.wednesday.banklocator.activity.MainActivity
 import com.wednesday.banklocator.adapter.IfscAdapter
+import com.wednesday.banklocator.db.FavouritesBankDatabase
 import com.wednesday.banklocator.model.IfscResponse
+import com.wednesday.banklocator.repository.BankDetailsRepository
 import com.wednesday.banklocator.util.Resource
 import com.wednesday.banklocator.viewmodel.BankViewModel
+import com.wednesday.banklocator.viewmodel.BankViewModelFactory
 import kotlinx.android.synthetic.main.fragment_search_bank.*
 
 
 class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
 {
     lateinit var viewModel:BankViewModel
-    private val bankAdapter: IfscAdapter by lazy {
-        IfscAdapter(IfscResponse())
-    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        viewModel = (activity as MainActivity).viewModel
+        //setupRecyclerView()
+        val newsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
+        val viewModelProviderFactory = newsRepository?.let { BankViewModelFactory(it) }
+        viewModel = viewModelProviderFactory?.let {
+            ViewModelProvider(this,
+                it
+            ).get(BankViewModel::class.java)
+        }!!
+        val newsIfscAdapter: IfscAdapter by lazy {
+            IfscAdapter(IfscResponse(),viewModel)
+        }
+        bankDetailsRecyclerView.adapter = newsIfscAdapter
+        bankDetailsRecyclerView.layoutManager = LinearLayoutManager(activity)
         searchButton.setOnClickListener {
             if(bankSearch_text_field.toString().isNotEmpty())
             {
@@ -36,10 +47,10 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
             when(response) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    response.data?.let {bankResponse ->
-                        bankAdapter.resetDataSource(bankResponse)
+                    response.data?.let { newsResponse ->
+                        newsIfscAdapter.resetDataSource(newsResponse)
                         bankDetailsRecyclerView.apply {
-                            adapter = bankAdapter
+                            adapter = newsIfscAdapter
                             layoutManager = LinearLayoutManager(activity)
                         }
                     }
@@ -47,8 +58,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity,"An error occured: $message", Toast.LENGTH_LONG).show()
-
+                        Log.e("BankSearchFragment", "An error occured: $message")
                     }
                 }
                 is Resource.Loading -> {
@@ -68,7 +78,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
 
     private fun setupRecyclerView() {
         bankDetailsRecyclerView.apply {
-            adapter = bankAdapter
+            //adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
