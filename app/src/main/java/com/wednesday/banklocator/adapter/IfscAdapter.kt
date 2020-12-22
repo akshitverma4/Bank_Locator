@@ -54,9 +54,8 @@ class IfscAdapter(var item: IfscResponse, private val viewModel: BankViewModel) 
         return 0
     }
 
-
-    fun resetDataSource(weather: IfscResponse) {
-        item = weather
+    fun resetDataSource(Ifsc: IfscResponse) {
+        item = Ifsc
         notifyDataSetChanged()
     }
 
