@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
-        val newsRepository = BankDetailsRepository(FavouritesBankDatabase(this))
-        val viewModelProviderFactory = BankViewModelFactory(newsRepository)
+        val bankDetailsRepository = BankDetailsRepository(FavouritesBankDatabase(this))
+        val viewModelProviderFactory = BankViewModelFactory(bankDetailsRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(BankViewModel::class.java)
     }
 }
