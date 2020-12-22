@@ -31,9 +31,9 @@ class DatabaseAdapter(var item: List<IfscResponse>, private val viewModel: BankV
     override fun onBindViewHolder(holder: bankDetailsViewHolder, position: Int) {
         val model = item[position]
         holder.itemView.apply {
-            bankName_tv.text = model.BRANCH
-            bankAddress_tv.text = model.ADDRESS
-            deleteIcon_iv.setOnClickListener {
+            bankNameTextView.text = model.BRANCH
+            bankAddressTextView.text = model.ADDRESS
+            deleteIconImageView.setOnClickListener {
                 val toast = Toast.makeText(
                     context,
                     model.BRANCH + " deleted from Local Database",
