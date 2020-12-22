@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.partial_banks_list.view.bankAddress_tv
 import kotlinx.android.synthetic.main.partial_banks_list.view.bankName_tv
 import kotlinx.android.synthetic.main.partial_saved_banks_list.view.*
 
-class DatabaseAdapter(var item: List<IfscResponse>, private val viewModel: BankViewModel) :
-    RecyclerView.Adapter<DatabaseAdapter.bankDetailsViewHolder>(
+class LocalDatabaseAdapter(var bankDetails: List<IfscResponse>, private val viewModel: BankViewModel) :
+    RecyclerView.Adapter<LocalDatabaseAdapter.bankDetailsViewHolder>(
     ) {
     inner class bankDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -29,7 +29,7 @@ class DatabaseAdapter(var item: List<IfscResponse>, private val viewModel: BankV
     }
 
     override fun onBindViewHolder(holder: bankDetailsViewHolder, position: Int) {
-        val model = item[position]
+        val model = bankDetails[position]
         holder.itemView.apply {
             bankNameTextView.text = model.BRANCH
             bankAddressTextView.text = model.ADDRESS
@@ -54,7 +54,7 @@ class DatabaseAdapter(var item: List<IfscResponse>, private val viewModel: BankV
 
     override fun getItemCount(): Int {
 
-        return item.size
+        return bankDetails.size
     }
 
     private var onItemClickListener: ((IfscResponse) -> Unit)? = null
