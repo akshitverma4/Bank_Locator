@@ -25,8 +25,8 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //setupRecyclerView()
-        val newsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
-        val viewModelProviderFactory = newsRepository?.let { BankViewModelFactory(it) }
+        val bankDetailsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
+        val viewModelProviderFactory = bankDetailsRepository?.let { BankViewModelFactory(it) }
         viewModel = viewModelProviderFactory?.let {
             ViewModelProvider(this,
                 it
