@@ -26,24 +26,24 @@ class FavouritesBankFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_favourites_bank, container, false)
 
-        val newsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
-        val viewModelProviderFactory = newsRepository?.let { BankViewModelFactory(it) }
+        val bankDetailsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
+        val viewModelProviderFactory = bankDetailsRepository?.let { BankViewModelFactory(it) }
         viewModel = viewModelProviderFactory?.let {
             ViewModelProvider(
                 this,
                 it
             ).get(BankViewModel::class.java)
         }!!
-        val newsDatabaseAdapter:IfscAdapter by lazy {
+
+        val ifscAdapter: IfscAdapter by lazy {
             IfscAdapter(ArrayList(), viewModel)
         }
-        root.favouriteBanksRecyclerView.adapter = newsDatabaseAdapter
+        root.favouriteBanksRecyclerView.adapter = ifscAdapter
         root.favouriteBanksRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-
         viewModel.getAllShoppingItems().observe(requireActivity(), Observer {
-            newsDatabaseAdapter.item = it as ArrayList<IfscResponse>
-            newsDatabaseAdapter.notifyDataSetChanged()
+            ifscAdapter.item = it as ArrayList<IfscResponse>
+            ifscAdapter.notifyDataSetChanged()
         })
 
         return root
