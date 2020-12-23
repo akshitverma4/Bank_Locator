@@ -11,7 +11,7 @@ import com.wednesday.banklocator.model.IfscResponse
 import com.wednesday.banklocator.viewmodel.BankViewModel
 import kotlinx.android.synthetic.main.partial_banks_list.view.*
 
-class IfscAdapter(var item: IfscResponse, private val viewModel: BankViewModel) :
+class IfscAdapter(var item: ArrayList<IfscResponse>, private val viewModel: BankViewModel) :
     RecyclerView.Adapter<IfscAdapter.bankDetailsViewHolder>(
     ) {
     inner class bankDetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -47,17 +47,14 @@ class IfscAdapter(var item: IfscResponse, private val viewModel: BankViewModel) 
     }
 
 
-    override fun getItemCount(): Int {
-        if (item.BANK != "Search") {
-            return 1
-        }
-        return 0
+   override fun getItemCount(): Int {
+       return item.size
     }
 
-    fun resetDataSource(Ifsc: IfscResponse) {
-        item = Ifsc
+
+    fun resetDataSource(weather: ArrayList<IfscResponse>) {
+        item = weather
         notifyDataSetChanged()
     }
-
     private var onItemClickListener: ((IfscResponse) -> Unit)? = null
 }
