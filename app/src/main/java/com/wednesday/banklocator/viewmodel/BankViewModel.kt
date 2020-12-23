@@ -15,9 +15,9 @@ class BankViewModel(val bankDetailsRepository: BankDetailsRepository
 
 val ifscCodes: MutableLiveData<Resource<IfscResponse>> = MutableLiveData()
 
-fun getIfscCode(IFSC: String) = viewModelScope.launch {
+fun getIfscCode(Ifsc: String) = viewModelScope.launch {
     ifscCodes.postValue(Resource.Loading())
-    val response = bankDetailsRepository.getIfscCode(IFSC)
+    val response = bankDetailsRepository.getIfscCode(Ifsc)
     ifscCodes.postValue(handleIfscCodeResponse(response))
 
 }
