@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_search_bank.*
 class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
 {
     lateinit var viewModel:BankViewModel
+    val list:ArrayList<IfscResponse> = ArrayList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,9 +49,8 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { Response ->
-                        val list:ArrayList<IfscResponse> = ArrayList()
-                        list.add(Response)
-                        newsIfscAdapter.resetDataSource(list)
+                        list.clear()
+                        list.add(newsResponse)
                         bankDetailsRecyclerView.apply {
                             adapter = newsIfscAdapter
                             layoutManager = LinearLayoutManager(activity)
