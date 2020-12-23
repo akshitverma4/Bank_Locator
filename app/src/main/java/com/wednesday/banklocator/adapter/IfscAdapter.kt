@@ -29,9 +29,9 @@ class IfscAdapter(var item: ArrayList<IfscResponse>, private val viewModel: Bank
     override fun onBindViewHolder(holder: bankDetailsViewHolder, position: Int) {
         val model = item
         holder.itemView.apply {
-            bankName_tv.text = model.BRANCH
-            bankAddress_tv.text = model.ADDRESS
-            favouritesIcon_iv.setOnClickListener {
+            bankNameTextView.text = model.BRANCH
+            bankAddressTextView.text = model.ADDRESS
+            favouritesIconImageView.setOnClickListener {
                 val toast = Toast.makeText(context, model.BRANCH+" added to Local Database", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER_VERTICAL,0,0)
                 toast.show()
@@ -52,8 +52,8 @@ class IfscAdapter(var item: ArrayList<IfscResponse>, private val viewModel: Bank
     }
 
 
-    fun resetDataSource(weather: ArrayList<IfscResponse>) {
-        item = weather
+    fun resetDataSource(Ifsc: ArrayList<IfscResponse>) {
+        item = Ifsc
         notifyDataSetChanged()
     }
     private var onItemClickListener: ((IfscResponse) -> Unit)? = null
