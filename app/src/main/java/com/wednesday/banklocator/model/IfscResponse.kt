@@ -11,16 +11,16 @@ import androidx.room.PrimaryKey
 )
 data class IfscResponse(
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
-    var ADDRESS: String="",
-    var BANK: String="",
-    var BRANCH: String="",
-    var CITY: String="",
-    var CONTACT: String="",
-    var DISTRICT: String="",
-    var IFSC: String="",
-    var RTGS: Boolean=false,
-    var STATE: String=""
+    var id: Int,
+    var ADDRESS: String,
+    var BANK: String,
+    var BRANCH: String,
+    var CITY: String,
+    var CONTACT: String,
+    var DISTRICT: String,
+    var IFSC: String,
+    var RTGS: Boolean,
+    var STATE: String
 )
    
 
