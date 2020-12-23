@@ -51,10 +51,5 @@ class IfscAdapter(var item: ArrayList<IfscResponse>, private val viewModel: Bank
        return item.size
     }
 
-
-    fun resetDataSource(Ifsc: ArrayList<IfscResponse>) {
-        item = Ifsc
-        notifyDataSetChanged()
-    }
     private var onItemClickListener: ((IfscResponse) -> Unit)? = null
 }
