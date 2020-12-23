@@ -24,7 +24,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupRecyclerView()
+  
         val bankDetailsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
         val viewModelProviderFactory = bankDetailsRepository?.let { BankViewModelFactory(it) }
         viewModel = viewModelProviderFactory?.let {
@@ -33,7 +33,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
             ).get(BankViewModel::class.java)
         }!!
         val newsIfscAdapter: IfscAdapter by lazy {
-            IfscAdapter(IfscResponse(),viewModel)
+            IfscAdapter(ArrayList(),viewModel)
         }
         bankDetailsRecyclerView.adapter = newsIfscAdapter
         bankDetailsRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -47,8 +47,10 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
             when(response) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    response.data?.let { newsResponse ->
-                        newsIfscAdapter.resetDataSource(newsResponse)
+                    response.data?.let { Response ->
+                        val list:ArrayList<IfscResponse> = ArrayList()
+                        list.add(Response)
+                        newsIfscAdapter.resetDataSource(list)
                         bankDetailsRecyclerView.apply {
                             adapter = newsIfscAdapter
                             layoutManager = LinearLayoutManager(activity)
@@ -76,12 +78,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
         paginationProgressBar.visibility = View.VISIBLE
     }
 
-    private fun setupRecyclerView() {
-        bankDetailsRecyclerView.apply {
-            //adapter = newsAdapter
-            layoutManager = LinearLayoutManager(activity)
-        }
-    }
+   
 
 
 }
