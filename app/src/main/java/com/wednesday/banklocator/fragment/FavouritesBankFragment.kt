@@ -34,15 +34,15 @@ class FavouritesBankFragment : Fragment() {
                 it
             ).get(BankViewModel::class.java)
         }!!
-        val newsDatabaseAdapter: DatabaseAdapter by lazy {
-            DatabaseAdapter(listOf(), viewModel)
+        val newsDatabaseAdapter:IfscAdapter by lazy {
+            IfscAdapter(ArrayList(), viewModel)
         }
         root.favouriteBanksRecyclerView.adapter = newsDatabaseAdapter
         root.favouriteBanksRecyclerView.layoutManager = LinearLayoutManager(activity)
 
 
         viewModel.getAllShoppingItems().observe(requireActivity(), Observer {
-            newsDatabaseAdapter.item = it
+            newsDatabaseAdapter.item = it as ArrayList<IfscResponse>
             newsDatabaseAdapter.notifyDataSetChanged()
         })
 
