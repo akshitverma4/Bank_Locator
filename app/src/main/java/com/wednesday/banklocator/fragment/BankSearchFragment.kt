@@ -38,6 +38,8 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
         }
         bankDetailsRecyclerView.adapter = newsIfscAdapter
         bankDetailsRecyclerView.layoutManager = LinearLayoutManager(activity)
+        newsIfscAdapter.setOnItemClickListener {
+         viewModel.upsert(it)
         searchButton.setOnClickListener {
             if(bankSearch_text_field.toString().isNotEmpty())
             {
