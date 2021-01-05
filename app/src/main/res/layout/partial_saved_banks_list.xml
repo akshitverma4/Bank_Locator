@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:adjustViewBounds="true"
     android:layout_marginBottom="16dp"
-    android:background="@color/purple_500"
+    android:adjustViewBounds="true"
+    android:background="@color/orange"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/bankNameTextView"
+        android:id="@+id/bankName_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/favouritesIconImageView"
+        android:layout_toStartOf="@id/deleteIcon_iv"
         android:text="@string/bank_name"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/bankAddressTextView"
+        android:id="@+id/bankAddress_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bankNameTextView"
+        android:layout_below="@id/bankName_tv"
         android:layout_marginTop="5dp"
         android:text="@string/bank_address"
         android:textColor="@android:color/white"
@@ -31,7 +31,7 @@
 
 
     <ImageView
-        android:id="@+id/favouritesIconImageView"
+        android:id="@+id/deleteIcon_iv"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentEnd="true"
@@ -41,7 +41,7 @@
         android:clickable="true"
         android:contentDescription="@string/icon_iv"
         android:focusable="true"
-        android:src="@drawable/ic_heart"
+        android:src="@drawable/ic_delete_icon"
         android:textSize="20sp" />
 
 </RelativeLayout>

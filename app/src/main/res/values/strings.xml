@@ -7,4 +7,7 @@
     <string name="enter_ifsc_code">Enter IFSC Code</string>
     <string name="bank_name">Bank Name</string>
     <string name="bank_address">Bank Address</string>
+    <string name="icon_iv">Icon_iv</string>
+    <string name="search_image_button">search_image_button</string>
+    <string name="saved_bank_details">Saved Bank Details</string>
 </resources>
