@@ -9,8 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wednesday.banklocator.R
-import com.wednesday.banklocator.adapter.DatabaseAdapter
+import com.wednesday.banklocator.adapter.IfscAdapter
 import com.wednesday.banklocator.db.FavouritesBankDatabase
+import com.wednesday.banklocator.model.Ifsc
 import com.wednesday.banklocator.repository.BankDetailsRepository
 import com.wednesday.banklocator.viewmodel.BankViewModel
 import com.wednesday.banklocator.viewmodel.BankViewModelFactory
@@ -42,7 +43,7 @@ class FavouritesBankFragment : Fragment() {
         root.favouriteBanksRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         viewModel.getAllShoppingItems().observe(requireActivity(), Observer {
-            ifscAdapter.item = it as ArrayList<IfscResponse>
+            ifscAdapter.item = it as ArrayList<Ifsc>
             ifscAdapter.notifyDataSetChanged()
         })
 

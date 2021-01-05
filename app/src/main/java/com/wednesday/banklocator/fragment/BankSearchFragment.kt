@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wednesday.banklocator.R
 import com.wednesday.banklocator.adapter.IfscAdapter
 import com.wednesday.banklocator.db.FavouritesBankDatabase
-import com.wednesday.banklocator.model.IfscResponse
+import com.wednesday.banklocator.model.Ifsc
 import com.wednesday.banklocator.repository.BankDetailsRepository
 import com.wednesday.banklocator.util.Resource
 import com.wednesday.banklocator.viewmodel.BankViewModel
@@ -21,11 +21,11 @@ import kotlinx.android.synthetic.main.fragment_search_bank.*
 class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
 {
     lateinit var viewModel:BankViewModel
-    val list:ArrayList<IfscResponse> = ArrayList()
+    val list:ArrayList<Ifsc> = ArrayList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-  
+
         val bankDetailsRepository = activity?.let { FavouritesBankDatabase(it) }?.let { BankDetailsRepository(it) }
         val viewModelProviderFactory = bankDetailsRepository?.let { BankViewModelFactory(it) }
         viewModel = viewModelProviderFactory?.let {
@@ -33,13 +33,14 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
                 it
             ).get(BankViewModel::class.java)
         }!!
-        val ifscAdapter: IfscAdapter by lazy {
+        val newsIfscAdapter: IfscAdapter by lazy {
             IfscAdapter(ArrayList(),viewModel)
         }
-        bankDetailsRecyclerView.adapter = ifscAdapter
+        bankDetailsRecyclerView.adapter = newsIfscAdapter
         bankDetailsRecyclerView.layoutManager = LinearLayoutManager(activity)
-        ifscAdapter.setOnItemClickListener {
-         viewModel.upsert(it)
+        newsIfscAdapter.setOnItemClickListener {
+            viewModel.upsert(it)
+        }
         searchButton.setOnClickListener {
             if(bankSearch_text_field.toString().isNotEmpty())
             {
@@ -51,10 +52,10 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { Response ->
-                        list.clear()
-                        list.add(newsResponse)
+                        //list.clear()
+                        list.add(Response)
                         bankDetailsRecyclerView.apply {
-                            adapter = IfscAdapter
+                            adapter = newsIfscAdapter
                             layoutManager = LinearLayoutManager(activity)
                         }
                     }
@@ -80,7 +81,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
         paginationProgressBar.visibility = View.VISIBLE
     }
 
-   
+
 
 
 }
