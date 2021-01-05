@@ -33,12 +33,12 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
                 it
             ).get(BankViewModel::class.java)
         }!!
-        val newsIfscAdapter: IfscAdapter by lazy {
+        val ifscAdapter: IfscAdapter by lazy {
             IfscAdapter(ArrayList(),viewModel)
         }
-        bankDetailsRecyclerView.adapter = newsIfscAdapter
+        bankDetailsRecyclerView.adapter = ifscAdapter
         bankDetailsRecyclerView.layoutManager = LinearLayoutManager(activity)
-        newsIfscAdapter.setOnItemClickListener {
+        ifscAdapter.setOnItemClickListener {
          viewModel.upsert(it)
         searchButton.setOnClickListener {
             if(bankSearch_text_field.toString().isNotEmpty())
@@ -54,7 +54,7 @@ class BankSearchFragment : Fragment(R.layout.fragment_search_bank)
                         list.clear()
                         list.add(newsResponse)
                         bankDetailsRecyclerView.apply {
-                            adapter = newsIfscAdapter
+                            adapter = IfscAdapter
                             layoutManager = LinearLayoutManager(activity)
                         }
                     }
