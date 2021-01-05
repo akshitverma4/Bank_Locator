@@ -35,14 +35,13 @@ class IfscAdapter(var item: ArrayList<IfscResponse>, private val viewModel: Bank
                 val toast = Toast.makeText(context, model.BRANCH+" added to Local Database", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER_VERTICAL,0,0)
                 toast.show()
-                viewModel.upsert(model)
-            }
-
-
-
-            setOnClickListener {
+                //viewModel.upsert(model)
                 onItemClickListener?.let { it(model) }
             }
+
+
+
+            
         }
     }
 
